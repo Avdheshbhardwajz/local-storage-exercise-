@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Storage Excercise</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        width: 100vw;
+        height: 100vh;
+      }
+      .container {
+        border: 1px solid black;
+        box-sizing: border-box;
+        /* border: 1px solid white; */
+        width: 60%;
+        height: 80%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        padding: 5%;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .tableContainer {
+        border: 1px solid black;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      table {
+        border: 1px solid black;
+      }
+      form {
+        border: 1px solid black;
+
+        /* display: flex; */
+        flex-direction: column;
+
+        /* justify-content: center;
+        align-items: center; */
+        row-gap: 20px;
+      }
+      form label {
+        display: block;
+        margin-bottom: 20px;
+      }
+      #submitbtn {
+        width: 100px;
+      }
+      table {
+        border-collapse: separate;
+        border-spacing: 20px;
+        border: 0px;
+      }
+      th {
+        padding: 20px;
+        border: 1px solid black;
+      }
+      input {
+        padding: 10px 20px;
+      }
+      label {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="formm" action="#">
+        <label>
+          UserName:
+          <input type="text" name="UserName" id="Name" />
+        </label>
+        <label>
+          Age:
+          <input type="number" name="Age" id="Agee" />
+        </label>
+
+        <input onclick="Submit()" type="submit" id="submitbtn" />
+      </form>
+      <div class="tableContainer">
+        <table id="Data">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <a href="#" onclick="show()">SHOW</a>
+      </div>
+    </div>
+    <script>
+      let form = document.getElementById("formm");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const userName = document.getElementById("Name").value;
+        const userAge = document.getElementById("Agee").value;
+        let userDetails = {
+          name: userName,
+          age: userAge,
+        };
+        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        alert("Data Has Been Saved ");
+      });
+
+      function show() {
+        let dataofUser = JSON.parse(localStorage.getItem("userDetails"));
+        let table = document.getElementById("Data");
+        let tr = document.createElement("tr");
+        let td = tr.appendChild(document.createElement("td"));
+        let tdd = tr.appendChild(document.createElement("td"));
+        td.textContent = dataofUser.name;
+        tdd.textContent = dataofUser.age;
+        table.querySelector("tbody").appendChild(tr);
+      }
+    </script>
+  </body>
+</html>
